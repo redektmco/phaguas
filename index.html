@@ -242,18 +242,24 @@ button{cursor:pointer}
 /* ===== FAQ ===== */
 .faq{max-width:860px;margin:auto}
 .faq h2{text-align:center;margin:0 auto 40px}
-.faq details{border:1px solid var(--line);border-radius:14px;padding:0 22px;margin-bottom:12px;background:#fff;transition:border-color .3s,box-shadow .3s}
+.faq details{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;padding:0 24px 0 26px;margin-bottom:12px;background:#fff;transition:border-color .35s,box-shadow .35s,background-color .35s}
+.faq details::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--blue),#0a8fc4);transform:scaleY(0);transform-origin:50% 0;transition:transform .5s var(--ease)}
 .faq details:hover{border-color:#b5dcec}
-.faq details[open]{border-color:#9fdaf2;box-shadow:var(--shadowSm)}
-.faq summary{cursor:pointer;font-weight:750;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:16px;padding:20px 0}
+.faq details.is-open,html:not(.js) .faq details[open]{border-color:#9fdaf2;background:#f6fbfe;box-shadow:0 22px 44px -28px #0b3a5280}
+.faq details.is-open::before,html:not(.js) .faq details[open]::before{transform:scaleY(1)}
+.faq summary{cursor:pointer;font-weight:750;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:16px;padding:20px 0;transition:color .3s}
+.faq summary:hover,.faq details.is-open summary{color:#0b6d98}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:6px}
-.pm{position:relative;flex:0 0 32px;height:32px;border-radius:50%;background:#e3f5fc;transition:transform .35s var(--ease),background .3s}
-.pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;border-radius:2px;background:#0789bd;transform:translate(-50%,-50%)}
-.pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .35s var(--ease)}
-.faq details[open] .pm{transform:rotate(180deg);background:var(--blue)}
-.faq details[open] .pm::before,.faq details[open] .pm::after{background:#062c3e}
-.faq details[open] .pm::after{transform:translate(-50%,-50%) rotate(0)}
+.faq summary:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:8px}
+@supports selector(:has(a)){.faq summary:focus-visible{outline:none}.faq details:has(summary:focus-visible){border-color:var(--blue);box-shadow:0 0 0 4px #03bafc33}}
+.pm{position:relative;flex:0 0 32px;height:32px;border-radius:50%;background:#e3f5fc;transition:transform .45s var(--ease),background .3s,box-shadow .45s}
+.pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;border-radius:2px;background:#0789bd;transform:translate(-50%,-50%);transition:background .3s}
+.pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .45s var(--ease),background .3s}
+.faq summary:hover .pm{background:#cdeefb}
+.faq details.is-open .pm,html:not(.js) .faq details[open] .pm{transform:rotate(180deg);background:var(--blue);box-shadow:0 0 0 6px #03bafc26}
+.faq details.is-open .pm{animation:pmPop .45s var(--ease)}
+.faq details.is-open .pm::before,.faq details.is-open .pm::after,html:not(.js) .faq details[open] .pm::before,html:not(.js) .faq details[open] .pm::after{background:#062c3e}
+.faq details.is-open .pm::after,html:not(.js) .faq details[open] .pm::after{transform:translate(-50%,-50%) rotate(0)}
 .ans{overflow:hidden}
 .ans p{line-height:1.7;font-size:15px;color:var(--muted);margin:0 40px 22px 0}
 
@@ -307,6 +313,7 @@ button{cursor:pointer}
 @keyframes ringOut{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.6);opacity:0}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes sweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+@keyframes pmPop{0%{scale:1}40%{scale:1.18}100%{scale:1}}
 @keyframes pulse{0%{box-shadow:var(--shadowLg),0 0 0 8px #03bafc99}70%{box-shadow:var(--shadowLg),0 0 0 22px #03bafc00}100%{box-shadow:var(--shadowLg),0 0 0 8px #ffffff14}}
 
 /* ===== Responsivo ===== */
@@ -400,6 +407,7 @@ button{cursor:pointer}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
   .bubbles,.ring.r2{display:none}
+  .faq details::before,.faq .pm,.faq .pm::after{transition-duration:.45s!important}
   .waves i:nth-child(1){animation:wave900 18s linear infinite!important}
   .waves i:nth-child(2){animation:wave1300 26s linear infinite reverse!important}
   .waves i:nth-child(3){animation:wave1700 32s linear infinite!important}
@@ -801,18 +809,30 @@ button{cursor:pointer}
     });
   });
 
-  /* FAQ com abertura suave */
+  /* FAQ: abertura animada (altura, barra lateral, ícone e texto da resposta) */
+  var easeOut = 'cubic-bezier(.2,.7,.2,1)';
   document.querySelectorAll('.faq details').forEach(function(d){
-    var s = d.querySelector('summary'), a = d.querySelector('.ans');
+    var s = d.querySelector('summary'), a = d.querySelector('.ans'), txt = a.firstElementChild;
+    if(d.open) d.classList.add('is-open');
     s.addEventListener('click', function(e){
-      if(reduce || !a.animate) return;
       e.preventDefault();
-      if(d.open){
-        var anim = a.animate([{height:a.offsetHeight + 'px',opacity:1},{height:'0px',opacity:0}],{duration:280,easing:'ease',fill:'forwards'});
-        anim.onfinish = function(){ d.open = false; anim.cancel(); };
+      if(!a.animate){ d.open = !d.open; d.classList.toggle('is-open', d.open); return; }
+      if(d._anim) d._anim.cancel();
+      txt.getAnimations().forEach(function(x){ x.cancel(); });
+      if(d.classList.contains('is-open')){
+        d.classList.remove('is-open');
+        txt.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-6px)'}],{duration:180,easing:'ease-in',fill:'forwards'});
+        var close = d._anim = a.animate([{height:a.offsetHeight + 'px'},{height:'0px'}],{duration:340,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
+        close.onfinish = function(){
+          d.open = false; close.cancel(); d._anim = null;
+          txt.getAnimations().forEach(function(x){ x.cancel(); });
+        };
       } else {
         d.open = true;
-        a.animate([{height:'0px',opacity:0},{height:a.offsetHeight + 'px',opacity:1}],{duration:380,easing:'cubic-bezier(.2,.7,.2,1)'});
+        d.classList.add('is-open');
+        var open = d._anim = a.animate([{height:'0px'},{height:a.offsetHeight + 'px'}],{duration:480,easing:easeOut});
+        open.onfinish = function(){ d._anim = null; };
+        txt.animate([{opacity:0,transform:'translateY(12px)',filter:'blur(3px)'},{opacity:1,transform:'none',filter:'blur(0)'}],{duration:520,delay:110,easing:easeOut,fill:'backwards'});
       }
     });
   });
