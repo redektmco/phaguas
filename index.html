@@ -44,9 +44,10 @@ button{cursor:pointer}
 .navin{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px;transition:height .3s var(--ease)}
 .nav.scrolled .navin{height:64px}
 .progress{position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:linear-gradient(90deg,var(--blue),#8fe8ff);transform:scaleX(0);transform-origin:0 50%}
-.brand{font-size:27px;letter-spacing:-1px;font-weight:900;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:baseline}
-.brand small{font-size:21px;color:var(--blue);font-weight:500;margin-left:6px}
-.brandmark{display:inline-block;color:var(--blue);margin-right:9px;font-size:25px;animation:sway 4s ease-in-out infinite}
+.brand{display:inline-flex;align-items:center;flex:0 0 auto;text-decoration:none;transition:opacity .2s}
+.brand:hover{opacity:.85}
+.brand img{height:60px;width:auto;transition:height .3s var(--ease)}
+.nav.scrolled .brand img{height:50px}
 .navright{display:flex;align-items:center;gap:24px}
 .navmail{text-decoration:none;font-size:13px;color:#daebf4;transition:color .2s}
 .navmail:hover{color:var(--blue)}
@@ -264,8 +265,7 @@ button{cursor:pointer}
 /* ===== Rodapé ===== */
 .foot{background:var(--deep);color:#d0e5ee;padding:34px 0}
 .footin{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap;font-size:13px}
-.foot .brand{font-size:22px}
-.foot .brand small{font-size:17px}
+.foot .brand img{height:54px}
 .fcontact{display:flex;gap:22px;flex-wrap:wrap}
 .foot a{color:#9fddf6;text-decoration:none}
 .foot a:hover{text-decoration:underline}
@@ -294,7 +294,6 @@ button{cursor:pointer}
 @keyframes wave{to{background-position-x:1440px}}
 @keyframes rise{0%{transform:translate(0,0);opacity:0}12%{opacity:.9}85%{opacity:.6}100%{transform:translate(var(--dx,24px),-115vh);opacity:0}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes sway{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
 @keyframes ping{0%{box-shadow:0 0 0 0 #03bafc99}80%,100%{box-shadow:0 0 0 9px #03bafc00}}
 @keyframes pingWarm{0%{box-shadow:0 0 0 0 #e8643c99}80%,100%{box-shadow:0 0 0 9px #e8643c00}}
 @keyframes ringOut{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.6);opacity:0}}
@@ -323,8 +322,8 @@ button{cursor:pointer}
   .wrap{padding:0 20px}
   .navin{height:66px}
   .nav.scrolled .navin{height:60px}
-  .brand{font-size:23px}
-  .brand small{font-size:17px}
+  .brand img{height:48px}
+  .nav.scrolled .brand img{height:42px}
   .navright .btn{padding:10px 12px;font-size:11px}
   .hero{padding:44px 0 120px}
   .hero h1{font-size:40px;letter-spacing:-1.7px}
@@ -384,7 +383,7 @@ button{cursor:pointer}
 
 <header class="nav" id="topo">
   <div class="wrap navin">
-    <a class="brand" href="#inicio" aria-label="PH Águas, início"><span class="brandmark">≋</span>ph<small>águas</small></a>
+    <a class="brand" href="#inicio"><img src="assets/img/logo-ph-aguas.png" alt="PH Águas" width="411" height="200"></a>
     <div class="navright">
       <a class="navmail" href="mailto:contato@phagos.com.br">contato@phagos.com.br</a>
       <a class="btn" href="#solicitar">Solicitar avaliação <span class="arr" aria-hidden="true">↗</span></a>
@@ -649,7 +648,7 @@ button{cursor:pointer}
 
 <footer class="foot">
   <div class="wrap footin">
-    <a class="brand" href="#inicio" aria-label="PH Águas, voltar ao início"><span class="brandmark">≋</span>ph<small>águas</small></a>
+    <a class="brand" href="#inicio"><img src="assets/img/logo-ph-aguas.png" alt="PH Águas — voltar ao início" width="411" height="200" loading="lazy" decoding="async"></a>
     <div class="fcontact">
       <span>Contato comercial: <a href="mailto:contato@phagos.com.br">contato@phagos.com.br</a></span>
       <span>WhatsApp: <a class="js-wa" href="https://wa.me/5511910301546" target="_blank" rel="noopener">(11) 91030-1546</a></span>
