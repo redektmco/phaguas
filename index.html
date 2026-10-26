@@ -41,13 +41,13 @@ button{cursor:pointer}
 /* ===== Navegação ===== */
 .nav{background:#102b3bf2;-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px);color:#fff;position:sticky;top:0;z-index:40;border-bottom:1px solid #ffffff1f;transition:background .3s,box-shadow .3s}
 .nav.scrolled{background:#0d2534f7;box-shadow:0 12px 30px -14px #000a}
-.navin{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px;transition:height .3s var(--ease)}
-.nav.scrolled .navin{height:64px}
+.navin{height:80px;display:flex;align-items:center;justify-content:space-between;gap:20px;transition:height .3s var(--ease)}
+.nav.scrolled .navin{height:68px}
 .progress{position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:linear-gradient(90deg,var(--blue),#8fe8ff);transform:scaleX(0);transform-origin:0 50%}
 .brand{display:inline-flex;align-items:center;flex:0 0 auto;text-decoration:none;transition:opacity .2s}
 .brand:hover{opacity:.85}
-.brand img{height:60px;width:auto;transition:height .3s var(--ease)}
-.nav.scrolled .brand img{height:50px}
+.brand img{height:48px;width:auto;transition:height .3s var(--ease)}
+.nav.scrolled .brand img{height:40px}
 .navright{display:flex;align-items:center;gap:24px}
 .navmail{text-decoration:none;font-size:13px;color:#daebf4;transition:color .2s}
 .navmail:hover{color:var(--blue)}
@@ -78,7 +78,7 @@ button{cursor:pointer}
 .lede{font-size:18px;color:var(--muted);line-height:1.7;max-width:640px;margin:0}
 
 /* ===== Hero ===== */
-.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--dark);color:#fff;padding:56px 0 132px;min-height:calc(100vh - 76px);min-height:calc(100svh - 76px);display:flex;align-items:center}
+.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--dark);color:#fff;padding:56px 0 132px;min-height:calc(100vh - 80px);min-height:calc(100svh - 80px);display:flex;align-items:center}
 .hero>.wrap{width:100%}
 .heroBg{position:absolute;inset:-6% 0 0;z-index:-3;will-change:transform}
 .heroBg img{width:100%;height:100%;object-fit:cover;animation:kenburns 24s var(--ease) both}
@@ -175,7 +175,7 @@ button{cursor:pointer}
 .sImg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,#0b2a3a66)}
 .sBody{position:relative;padding:0 26px 28px}
 .symbol{position:relative;z-index:2;width:48px;height:48px;border-radius:13px;background:#fff;color:#057bad;display:grid;place-items:center;margin:-24px 0 16px;box-shadow:0 8px 20px -8px #0b3a5259;transition:transform .35s var(--ease),background .35s,color .35s}
-.service:hover .symbol{transform:rotate(-6deg) scale(1.06);background:var(--blue);color:#062c3e}
+.service:hover .symbol{background:var(--blue);color:#062c3e}
 .service h3{margin:0 0 8px;font-size:18px;letter-spacing:-.4px;line-height:1.3}
 .service p{font-size:14px;color:var(--muted);line-height:1.65;margin:0}
 .service.main{grid-row:span 2;border-color:#50bfeb}
@@ -265,7 +265,7 @@ button{cursor:pointer}
 /* ===== Rodapé ===== */
 .foot{background:var(--deep);color:#d0e5ee;padding:40px 0}
 .footin{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap;font-size:13px}
-.foot .brand img{height:54px}
+.foot .brand img{height:48px}
 .fcontact{display:flex;gap:22px;flex-wrap:wrap}
 .foot a{color:#9fddf6;text-decoration:none}
 .foot a:hover{text-decoration:underline}
@@ -339,10 +339,10 @@ button{cursor:pointer}
 }
 @media(max-width:600px){
   .wrap{padding:0 20px}
-  .navin{height:66px}
+  .navin{height:68px}
   .nav.scrolled .navin{height:60px}
-  .brand img{height:48px}
-  .nav.scrolled .brand img{height:42px}
+  .brand img{height:40px}
+  .nav.scrolled .brand img{height:34px}
   .navright .btn{padding:10px 12px;font-size:11px}
   .hero{padding:44px 0 120px}
   .hero h1{font-size:40px;letter-spacing:-1.7px}
