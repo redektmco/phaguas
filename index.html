@@ -164,11 +164,16 @@ p,li,small{text-wrap:pretty}
 .photo{margin:0;position:relative;border-radius:22px;overflow:hidden;background:#cfe1e8;box-shadow:var(--shadowSm)}
 .photo img{width:100%;height:100%;object-fit:cover;transform:scale(1.1);transition:transform 1.6s var(--ease)}
 .photo.in img,html:not(.js) .photo img{transform:scale(1)}
-.impactPhoto{aspect-ratio:4/3}
-.impactPhoto img{object-position:54% 35%}
+.baPair{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.baItem{aspect-ratio:4/5}
+.baItem img{object-position:54% 38%}
+.baArrow{position:absolute;left:50%;top:44%;z-index:3;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:var(--dark);color:var(--blue);display:grid;place-items:center;box-shadow:0 0 0 6px #fff,0 14px 28px -10px #0b2a3a80}
+.baArrow .ic{width:20px;height:20px;stroke-width:2.2;animation:nudge 1.8s ease-in-out infinite}
+.tagPill.after i{background:var(--blue);animation:ping 2s infinite}
+.tagPill small{font-size:10.5px;font-weight:600;color:var(--muted)}
 .tagPill{position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:8px;background:#ffffffeb;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:var(--ink);font-size:12px;font-weight:700;padding:8px 13px;border-radius:999px}
 .tagPill i{width:8px;height:8px;border-radius:50%;background:#e8643c;animation:pingWarm 2s infinite}
-.dataCard{background:var(--dark);color:#fff;border-radius:22px;padding:34px;position:relative;overflow:hidden;width:min(90%,450px);margin:-120px 0 0 auto;z-index:2;box-shadow:var(--shadowLg)}
+.dataCard{background:var(--dark);color:#fff;border-radius:22px;padding:34px;position:relative;overflow:hidden;width:min(84%,420px);margin:-48px 0 0 auto;z-index:2;box-shadow:var(--shadowLg)}
 .dataCard::before{content:'↗';position:absolute;right:22px;top:18px;color:#ffffff17;font-size:76px;font-weight:800;line-height:1}
 .dataCard::after{content:"";position:absolute;left:-60px;bottom:-80px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#03bafc33,transparent 70%)}
 .dataCard>*{position:relative;z-index:1}
@@ -330,6 +335,7 @@ p,li,small{text-wrap:pretty}
 @keyframes ringOut{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.6);opacity:0}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes sweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+@keyframes nudge{0%,100%{translate:0 0}50%{translate:3px 0}}
 @keyframes drift{from{translate:0 0}to{translate:18px -10px}}
 @keyframes pmPop{0%{scale:1}40%{scale:1.18}100%{scale:1}}
 @keyframes pulse{0%{box-shadow:var(--shadowLg),0 0 0 8px #03bafc99}70%{box-shadow:var(--shadowLg),0 0 0 22px #03bafc00}100%{box-shadow:var(--shadowLg),0 0 0 8px #ffffff14}}
@@ -368,7 +374,7 @@ p,li,small{text-wrap:pretty}
   .section h2,.trust h2{font-size:clamp(26px,6.2vw + 4px,40px)}
   .final h2{font-size:clamp(27px,6.4vw + 4px,42px)}
   .impactVisual{max-width:680px}
-  .impactPhoto{aspect-ratio:16/9}
+  .baItem{aspect-ratio:1/1}
   .stripin{flex-direction:column;align-items:flex-start;gap:22px}
   .hero{padding:56px 0 140px;min-height:0}
   .hero::before{background:radial-gradient(circle at 82% 8%,#03bafc38,transparent 42%),linear-gradient(180deg,#0b2131f2 0%,#102b3be6 60%,#123a4fd9 100%)}
@@ -407,8 +413,12 @@ p,li,small{text-wrap:pretty}
   .serviceMore::after{right:-50px;top:auto;bottom:-20px;margin-top:0;width:220px}
   .trust::before{width:300px;left:auto;right:-130px;bottom:auto;top:24px}
   .howPanel::after{width:260px;right:-60px;bottom:-40px}
-  .impactPhoto{aspect-ratio:4/3}
-  .dataCard{width:calc(100% - 20px);margin-top:-64px;padding:28px 24px}
+  .baPair{gap:10px}
+  .baItem{aspect-ratio:4/5}
+  .baArrow{width:40px;height:40px;margin:-20px 0 0 -20px;box-shadow:0 0 0 5px #fff,0 10px 22px -10px #0b2a3a80}
+  .baItem .tagPill{left:10px;top:10px;padding:6px 10px;font-size:11px;gap:6px}
+  .baItem .tagPill small{font-size:9.5px}
+  .dataCard{width:100%;margin-top:16px;padding:28px 24px}
   .dataCard::before{font-size:72px;right:18px;top:16px}
   .serviceGrid{grid-template-columns:1fr}
   .service.main{grid-column:auto}
@@ -458,6 +468,8 @@ p,li,small{text-wrap:pretty}
   .dataCard .big{font-size:52px}
   .dataCard h3{font-size:17px}
   .pref label{padding:10px}
+  .baItem .tagPill{left:8px;top:8px;padding:5px 8px;font-size:10.5px;gap:5px}
+  .baItem .tagPill small{font-size:9px}
   .btn{white-space:normal;padding-left:16px;padding-right:16px}
   .navright .btn{white-space:nowrap}
 }
@@ -588,10 +600,17 @@ p,li,small{text-wrap:pretty}
       </div>
 
       <div class="impactVisual">
-        <figure class="photo impactPhoto" data-reveal="zoom">
-          <img src="assets/img/tubulacao-incrustada.webp" srcset="assets/img/tubulacao-incrustada-1200.webp 1200w, assets/img/tubulacao-incrustada.webp 2000w" sizes="(max-width: 980px) 100vw, 760px" alt="Interior de uma tubulação com incrustação e corrosão acumuladas na parede" width="2000" height="1259" loading="lazy" decoding="async">
-          <figcaption class="tagPill"><i aria-hidden="true"></i>Incrustações e depósitos</figcaption>
-        </figure>
+        <div class="baPair" data-reveal="zoom">
+          <figure class="photo baItem">
+            <img src="assets/img/tubulacao-incrustada-1200.webp" alt="Antes: interior de uma tubulação com incrustação e corrosão acumuladas na parede" width="1200" height="756" loading="lazy" decoding="async">
+            <figcaption class="tagPill"><i aria-hidden="true"></i>Antes</figcaption>
+          </figure>
+          <span class="baArrow" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <figure class="photo baItem">
+            <img src="assets/img/tubulacao-limpa-1200.webp" alt="Depois: a mesma tubulação com a parede interna limpa (imagem ilustrativa)" width="1200" height="755" loading="lazy" decoding="async">
+            <figcaption class="tagPill after"><i aria-hidden="true"></i>Depois <small>(ilustrativo)</small></figcaption>
+          </figure>
+        </div>
         <aside class="dataCard" data-reveal style="--d:.2s">
           <span class="datatop">Referência técnica · Eficiência</span>
           <div class="big">Até <span data-count="5">5</span>%</div>
